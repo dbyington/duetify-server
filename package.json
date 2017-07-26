@@ -1,0 +1,34 @@
+{
+  "name": "duetify-server",
+  "version": "0.0.1",
+  "description": "Search and play your favorite artist's collaborations from Spotify",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev-start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbyington/duetify-server.git"
+  },
+  "keywords": [
+    "spotify",
+    "duet",
+    "collaboration"
+  ],
+  "author": "dbyington",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dbyington/duetify-server/issues"
+  },
+  "homepage": "https://github.com/dbyington/duetify-server#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "kcors": "^2.2.1",
+    "koa": "^2.3.0",
+    "koa-body": "^2.3.0",
+    "koa-logger": "^3.0.1",
+    "koa-router": "^7.2.1"
+  }
+}
