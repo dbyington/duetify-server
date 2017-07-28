@@ -6,10 +6,17 @@ const body = require('koa-body');
 const logger = require('koa-logger');
 const cors = require('kcors');
 const router = require('./router');
+const koaRequest = require('koa-http-request');
+
+const koaRequestOptions = {
+  json: true
+};
 
 app
   .use(logger())
   .use(cors({origin: 'localhost'}))
+  .use(koaRequest(koaRequestOptions))
+  .use(body())
   .use(router.routes())
   .use(router.allowedMethods);
 

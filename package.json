@@ -25,10 +25,15 @@
   "homepage": "https://github.com/dbyington/duetify-server#readme",
   "dependencies": {
     "dotenv": "^4.0.0",
+    "form-data": "^2.2.0",
     "kcors": "^2.2.1",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
+    "koa-http-request": "^2.2.0",
     "koa-logger": "^3.0.1",
-    "koa-router": "^7.2.1"
+    "koa-router": "^7.2.1",
+    "node-fetch": "^1.7.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   }
 }
