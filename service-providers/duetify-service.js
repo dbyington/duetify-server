@@ -62,7 +62,6 @@ module.exports.clientCallback = async (ctx, next) => {
 
 module.exports.refreshToken = async (ctx, next) => {
   let bodyObject;
-  console.log('refreshToken token:',ctx.request.query.refresh_token);
   if (ctx.request.query.refresh_token) {
     const httpHeaders = {
       'Authorization': 'Basic ' + (new Buffer(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64'))
@@ -78,12 +77,10 @@ module.exports.refreshToken = async (ctx, next) => {
       form: form,
       json: true
     };
-    console.log('refreshToken fetchOptions:',fetchOptions);
     bodyObject = await request.post(fetchOptions)
     .then('data', data => {
       ctx.status = 200;
       let body = Object.assign({},data,{expires: new Date(moment().add(data.expires_in, 's').format())});
-      console.log('refresh body:',body);
       ctx.body = body;
     })
     .catch( err => console.log('error refreshing token:',err));
