@@ -7,7 +7,7 @@ const duetifyService = require('./service-providers/duetify-service');
 
 router
   .get('/login', spotifyService.login)
-  .get('/refresh_token', spotifyService.refreshToken)
+  .get('/refresh_token', duetifyService.refreshToken)
   .get('/', duetifyService.clientCallback);
 
 module.exports = router;
