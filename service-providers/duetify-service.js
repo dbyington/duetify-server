@@ -45,6 +45,7 @@ module.exports.clientCallback = async (ctx, next) => {
           expires_in: data.expires_in,
           access_token: data.access_token,
           refresh_token: data.refresh_token,
+          token_type: data.token_type,
           expires: new Date(moment().add(data.expires_in, 's').format())
         };
         return newBody;
