@@ -14,7 +14,7 @@ const koaRequestOptions = {
 
 app
   .use(logger())
-  .use(cors({origin: 'localhost'}))
+  .use(cors({origin: 'http://localhost:4200'}))
   .use(koaRequest(koaRequestOptions))
   .use(body())
   .use(router.routes())
