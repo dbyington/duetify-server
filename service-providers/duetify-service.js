@@ -1,5 +1,6 @@
 'use strict';
 const qs = require('qs');
+const moment = require('moment');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
 const request = require('request-promise');
@@ -7,6 +8,7 @@ const request = require('request-promise');
 const stateKey = 'spotify_auth_state';
 const redirectUri = 'http://localhost:8080/';
 const tokenUrl = 'https://accounts.spotify.com/api/token';
+const refreshUrl = 'https://accounts.spotify.com/api/token';
 
 
 module.exports.clientCallback = async (ctx, next) => {
@@ -37,22 +39,55 @@ module.exports.clientCallback = async (ctx, next) => {
       form: form
     };
     let bodyObject = await request.post(fetchOptions)
-      .then('data', data => {
+      .then(data => {
         data = JSON.parse(data);
-        return {
+        let newBody = {
           expires_in: data.expires_in,
           access_token: data.access_token,
-          refresh_token: data.refresh_token
+          refresh_token: data.refresh_token,
+          token_type: data.token_type,
+          expires: new Date(moment().add(data.expires_in, 's').format())
         };
-        // return responseBodyObject;
-        // ctx.status = 200;
+        return newBody;
+        return responseBodyObject;
+        ctx.status = 200;
       })
       .catch( err => {
         console.log(`Error retrieving token: ${err}`);
       });
-    const responseBodyObject = JSON.parse(bodyObject);
-    responseBodyObject['state'] = state;
+    const responseBodyObject = Object.assign({},bodyObject,{state: state});
     const responseBody = qs.stringify(responseBodyObject);
     ctx.redirect('http://localhost:4200/auth?' + responseBody);
   }
+};
+
+module.exports.refreshToken = async (ctx, next) => {
+  let bodyObject;
+  if (ctx.request.query.refresh_token) {
+    const httpHeaders = {
+      'Authorization': 'Basic ' + (new Buffer(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64'))
+    };
+    const form = {
+      grant_type: 'refresh_token',
+      refresh_token: ctx.request.query.refresh_token
+    };
+    const fetchOptions =  {
+      url: refreshUrl,
+      method: 'POST',
+      headers: httpHeaders,
+      form: form,
+      json: true
+    };
+    bodyObject = await request.post(fetchOptions)
+    .then('data', data => {
+      ctx.status = 200;
+      let body = Object.assign({},data,{expires: new Date(moment().add(data.expires_in, 's').format())});
+      ctx.body = body;
+    })
+    .catch( err => console.log('error refreshing token:',err));
+  } else {
+    ctx.status = 400;
+    bodyObject = { error: {code: 400, error_message: 'Bad request'}};
+  }
+  ctx.body = bodyObject;
 };
