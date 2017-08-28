@@ -1,4 +1,4 @@
-# duetify service
+# duetify server
 See [duetify](https://github.com/dbyington/duetify.git)
 
 Search and play your favorite artist's collaborations from Spotify.
@@ -8,9 +8,6 @@ Search and play your favorite artist's collaborations from Spotify.
 duetify helps you find artist collaboration tracks. Lookup your favorite artist and discover the tracks they have done with other artists.
 
 ## Screen shots
-[![Basic login](./images/Login-thumbnail.png)](./images/Login.png)
-[![Search Slash](./images/SearchSlash-thumbnail.png)](./images/SearchSlash.png)
-[![Slash Playlist](./images/SlashPlaylist-thumbnail.png)](./images/SlashPlaylist.png)
 [![Vai Playlist](./images/VaiPlaylist-thumbnail.png)](./images/VaiPlaylist.png)
 [![Cher Playlist](./images/CherPlaylist-thumbnail.png)](./images/CherPlaylist.png)
 
