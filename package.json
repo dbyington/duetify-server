@@ -31,8 +31,8 @@
     "koa-body": "^2.3.0",
     "koa-http-request": "^2.2.0",
     "koa-logger": "^3.0.1",
-    "koa-router": "^7.2.1",
-    "moment": "^2.18.1",
+    "koa-router": "^7.2.1",yarn/moment-2.29.4
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.7",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
